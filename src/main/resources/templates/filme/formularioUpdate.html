@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form action="#" th:action="@{/filme/salvar}" th:object ="${filme}" method="POST">
+                
+        <input type="hidden" th:field ="*{id}">
+        <div>
+		nome: <input type="text" name="nome" class="form-control"  th:field ="*{titulo}" required>
+        </div>
+
+		<div class="field">
+			<label for="anoLancamento">anoLancamento:</label> <input type="text" th:field ="*{anoLancamento}">
+		</div>
+
+		<div class="field">
+			<label for="director">director:</label> <input type="text" th:field ="*{director}">
+		</div>
+
+		<div class="field">
+			<label for="descricao">descricao:</label> <input
+				type="text" th:field ="*{descricao}">
+		</div>
+
+		<div class="field">
+			<label for="duracao">duracao:</label> <input type="text" th:field ="*{duracao}">
+		</div>
+
+		<div class="field">
+			<label for="capa">capa:</label> <input type="text" th:field ="*{capa}">
+		</div>
+
+		<input type="submit" name="acao" value="Enviar">
+	</form>
+</body>
+</html>

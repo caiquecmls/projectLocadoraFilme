@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="/filme/salvar" method="POST">
+
+		<div class="field">
+			<label for="nome">titulo:</label> <input type="text" id="titulo"
+				name="titulo" required>
+		</div>
+
+		<div class="field">
+			<label for="anoLancamento">anoLancamento:</label> <input type="text"
+				id="anoLancamento" name="anoLancamento">
+		</div>
+
+		<div class="field">
+			<label for="director">director:</label> <input type="text"
+				id="director" name="director">
+		</div>
+
+		<div class="field">
+			<label for="descricao">descricao:</label> <input
+				type="text" id="descricao" name="descricao">
+		</div>
+
+		<div class="field">
+			<label for="duracao">duracao:</label> <input type="text" id="duracao"
+				name="duracao">
+		</div>
+
+		<div class="field">
+			<label for="capa">capa:</label> <input type="text" id="capa"
+			
+				name="capa">
+		</div>
+
+		<input type="submit" name="acao" value="Enviar">
+	</form>
+
+
+	<script>
+        const $titulo = document.querySelector('[name="titulo"');
+        const $anoLancamento = document.querySelector('[name="anoLancamento"');
+        const $director = document.querySelector('[name="director"');
+        const $descricao = document.querySelector('[name="descricao"');
+        const $duracao = document.querySelector('[name="duracao"');
+        const $capa = document.querySelector('[name="capa"');
+    
+        $titulo.addEventListener("blur", infosDoEvento => {
+            const filme = infosDoEvento.target.value;
+            fetch("http://www.omdbapi.com/?apikey=3033e6e0&t=" + filme)
+
+                    .then(respostaDoServer => {
+                        return respostaDoServer.json();
+                    })
+                    .then(dadosDoFilme => {
+                        console.log(dadosDoFilme);
+                        $titulo.value = dadosDoFilme.Title;
+                        $anoLancamento.value = dadosDoFilme.Released;
+                        $director.value = dadosDoFilme.Director;
+                        $descricao.value = dadosDoFilme.Plot;
+                        $duracao.value = dadosDoFilme.Runtime;
+                        $capa.value = dadosDoFilme.Poster;
+                        
+                    });
+        });
+    </script>
+
+
+</body>
+</html>
